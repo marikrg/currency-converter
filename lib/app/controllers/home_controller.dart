@@ -4,21 +4,21 @@ import 'package:flutter/cupertino.dart';
 class HomeController {
   List<CurrencyModel> currencies;
 
-  final TextEditingController toText;
-  final TextEditingController fromText;
+  final TextEditingController filledValueController;
+  final TextEditingController convertedValueController;
 
-  CurrencyModel toCurrency;
   CurrencyModel fromCurrency;
+  CurrencyModel toCurrency;
 
-  HomeController({this.fromText, this.toText}) {
+  HomeController({this.filledValueController, this.convertedValueController}) {
     currencies = CurrencyModel.getCurrencies();
-    toCurrency = currencies[0];
-    fromCurrency = currencies[1];
+    fromCurrency = currencies[0];
+    toCurrency = currencies[1];
   }
 
   void convert() {
     print('converting...');
-    double value = double.tryParse(toText.text) ?? 1.0;
+    double value = double.tryParse(filledValueController.text) ?? 1.0;
     double convertedValue;
 
     if (toCurrency.name == 'Brazilian Real') {
@@ -31,6 +31,6 @@ class HomeController {
       convertedValue = value * fromCurrency.bitcoin;
     }
     print(convertedValue.toStringAsFixed(2));
-    fromText.text = convertedValue.toStringAsFixed(2);
+    convertedValueController.text = convertedValue.toStringAsFixed(2);
   }
 }

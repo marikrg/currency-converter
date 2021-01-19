@@ -4,19 +4,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
-  final fromText = TextEditingController();
-  final toText = TextEditingController();
+  final filledValueController = TextEditingController();
+  final convertedValueController = TextEditingController();
 
-  final homeController = HomeController(fromText: fromText, toText: toText);
+  final homeController = HomeController(
+      filledValueController: filledValueController,
+      convertedValueController: convertedValueController);
 
   test('Should convert from Brazilian Real to US Dolar', () {
-    toText.text = '2.0';
+    filledValueController.text = '2.0';
     homeController.convert();
-    expect(fromText.text, '0.36');
+    expect(convertedValueController.text, '0.36');
   });
 
   test('Should convert from US Dolar to Brazilian Real', () {
-    toText.text = '1.0';
+    filledValueController.text = '1.0';
     homeController.toCurrency = CurrencyModel(
         name: 'US Dolar',
         real: 5.63,
@@ -30,6 +32,6 @@ main() {
         euro: 0.15,
         bitcoin: 0.000016);
     homeController.convert();
-    expect(fromText.text, '5.63');
+    expect(convertedValueController.text, '0.18');
   });
 }

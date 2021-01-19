@@ -10,13 +10,15 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   HomeController homeController;
-  final toText = TextEditingController();
-  final fromText = TextEditingController();
+  final filledValueController = TextEditingController();
+  final convertedValueController = TextEditingController();
 
   @override
   initState() {
     super.initState();
-    homeController = HomeController(toText: toText, fromText: fromText);
+    homeController = HomeController(
+        filledValueController: filledValueController,
+        convertedValueController: convertedValueController);
   }
 
   @override
@@ -33,20 +35,20 @@ class _HomeViewState extends State<HomeView> {
                   SizedBox(height: 20),
                   CurrencyBox(
                       items: homeController.currencies,
-                      controller: toText,
-                      selectedItem: homeController.toCurrency,
+                      controller: filledValueController,
+                      selectedItem: homeController.fromCurrency,
                       onChanged: (model) {
                         setState(() {
-                          homeController.toCurrency = model;
+                          homeController.fromCurrency = model;
                         });
                       }),
                   SizedBox(height: 10),
                   CurrencyBox(
                       items: homeController.currencies,
-                      controller: fromText,
-                      selectedItem: homeController.fromCurrency,
+                      controller: convertedValueController,
+                      selectedItem: homeController.toCurrency,
                       onChanged: (model) {
-                        homeController.fromCurrency = model;
+                        homeController.toCurrency = model;
                       }),
                   SizedBox(height: 40),
                   RaisedButton(
