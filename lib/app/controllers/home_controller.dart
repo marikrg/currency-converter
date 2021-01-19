@@ -17,18 +17,20 @@ class HomeController {
   }
 
   void convert() {
+    print('converting...');
     double value = double.tryParse(toText.text) ?? 1.0;
     double convertedValue;
 
-    if (fromCurrency.name == 'Brazilian Real') {
-      convertedValue = value * toCurrency.real;
-    } else if (fromCurrency.name == 'US Dolar') {
-      convertedValue = value * toCurrency.dolar;
-    } else if (fromCurrency.name == 'Euro') {
-      convertedValue = value * toCurrency.euro;
-    } else if (fromCurrency.name == 'Bitcoin') {
-      convertedValue = value * toCurrency.bitcoin;
+    if (toCurrency.name == 'Brazilian Real') {
+      convertedValue = value * fromCurrency.real;
+    } else if (toCurrency.name == 'US Dolar') {
+      convertedValue = value * fromCurrency.dolar;
+    } else if (toCurrency.name == 'Euro') {
+      convertedValue = value * fromCurrency.euro;
+    } else if (toCurrency.name == 'Bitcoin') {
+      convertedValue = value * fromCurrency.bitcoin;
     }
+    print(convertedValue.toStringAsFixed(2));
     fromText.text = convertedValue.toStringAsFixed(2);
   }
 }
